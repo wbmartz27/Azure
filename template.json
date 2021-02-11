@@ -1,0 +1,42 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.4.5.0",
+    "parameters": {
+        "location": {
+            "type": "String"
+        },
+        "name": {
+            "type": "String"
+        },
+        "addressSpaceCidr": {
+            "type": "String"
+        },
+        "subnetName": {
+            "type": "String"
+        },
+        "subnetCidr": {
+            "type": "String"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ClassicNetwork/virtualNetworks",
+            "apiVersion": "2017-11-15",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressSpaceCidr')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "addressPrefix": "[parameters('subnetCidr')]"
+                    }
+                ]
+            }
+        }
+    ]
+}
